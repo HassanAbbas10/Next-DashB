@@ -1,4 +1,8 @@
-import { Inter, Lusitana } from 'next/font/google';
-const inter = Inter({ subsets: ['latin'] });
-const lusitana = Lusitana({subsets:['latin'],weight:"400"});
-export default {inter,lusitana}
+import { Inter, Lusitana } from "next/font/google";
+export const inter = Inter({ subsets: ["latin"] });
+export const lusitana = Lusitana({ 
+    subsets: ["latin"], 
+    weight: "400" ,
+    display:"swap"
+});
+ 

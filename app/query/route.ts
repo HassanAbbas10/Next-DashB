@@ -1,26 +1,26 @@
-// import { db } from "@vercel/postgres";
+import { Pool } from '@neondatabase/serverless';
 
-// const client = await db.connect();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL, // Add your Neon database connection string here
+  ssl: { rejectUnauthorized: false }, // Ensure SSL is enabled
+});
 
-// async function listInvoices() {
-// 	const data = await client.sql`
-//     SELECT invoices.amount, customers.name
-//     FROM invoices
-//     JOIN customers ON invoices.customer_id = customers.id
-//     WHERE invoices.amount = 666;
-//   `;
+async function listInvoices() {
+	const data = await pool.query(`
+    SELECT invoices.amount, customers.name
+    FROM invoices
+    JOIN customers ON invoices.customer_id = customers.id
+    WHERE invoices.amount = 666;
+  `)
 
-// 	return data.rows;
-// }
+	return data.rows;
+}
 
 export async function GET() {
-  return Response.json({
-    message:
-      'Uncomment this file and remove this line. You can delete this file when you are finished.',
-  });
-  // try {
-  // 	return Response.json(await listInvoices());
-  // } catch (error) {
-  // 	return Response.json({ error }, { status: 500 });
-  // }
+ 
+  try {
+  	return Response.json(await listInvoices());
+  } catch (error) {
+  	return Response.json({ error }, { status: 500 });
+  }
 }

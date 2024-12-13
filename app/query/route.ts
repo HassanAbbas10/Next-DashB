@@ -1,6 +1,6 @@
 import { Pool } from '@neondatabase/serverless';
 
-const pool = new Pool({
+export const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // Add your Neon database connection string here
   ssl: { rejectUnauthorized: false }, // Ensure SSL is enabled
 });
